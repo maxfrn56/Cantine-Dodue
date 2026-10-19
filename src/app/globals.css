@@ -359,6 +359,56 @@ button {
   white-space: nowrap;
 }
 
+/* --------------------------------------------------------------------------
+   Mobile : rythme vertical plus serré, titres et boutons recalibrés
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  :root {
+    --gutter: 1.4rem;
+    --radius-arch: 28vw 28vw 0.7rem 0.7rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.75rem;
+  }
+
+  .section {
+    padding-block: clamp(3.75rem, 9vh, 5rem);
+  }
+
+  .sectionTitle {
+    font-size: clamp(2.35rem, 11vw, 3.15rem);
+    line-height: 0.92;
+  }
+
+  .eyebrow {
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+  }
+
+  .lede {
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .btn {
+    padding: 0.9rem 1.45rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    min-height: 2.85rem;
+  }
+
+  .shell {
+    padding-inline: max(var(--gutter), env(safe-area-inset-left));
+  }
+
+  .u-grain::after {
+    opacity: 0.28;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -49,3 +49,16 @@
   opacity: 0.6;
   transform: translateY(-0.05em);
 }
+
+@media (max-width: 899px) {
+  .root {
+    padding-block: 0.7rem;
+  }
+
+  .item {
+    gap: 1.1rem;
+    padding-inline: 0.55rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+  }
+}

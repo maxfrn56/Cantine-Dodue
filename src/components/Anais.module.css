@@ -67,6 +67,52 @@
   opacity: 0.62;
 }
 
+@media (max-width: 959px) {
+  .grid {
+    gap: 1.4rem;
+  }
+
+  .kicker {
+    margin-bottom: 0.15rem;
+  }
+
+  .script {
+    font-size: clamp(3.6rem, 16vw, 4.8rem);
+    margin-bottom: -0.18em;
+    padding-left: 0;
+  }
+
+  .portrait {
+    height: min(88vw, 24rem);
+  }
+
+  .copy {
+    gap: 0.9rem;
+    max-width: none;
+  }
+
+  .copy p {
+    font-size: 0.94rem;
+  }
+
+  .copy :global(.lede) {
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .quote {
+    max-width: none;
+    font-size: clamp(1.5rem, 6.4vw, 1.9rem);
+    line-height: 1.15;
+    padding-top: 0.25rem;
+  }
+
+  .sign {
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+  }
+}
+
 @media (min-width: 960px) {
   .grid {
     grid-template-columns: 0.95fr 1.05fr;

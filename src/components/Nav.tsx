@@ -17,7 +17,9 @@ export default function Nav() {
   // Apparition après le préloader
   useIsoLayoutEffect(() => {
     if (!introDone || !root.current) return;
-    gsap.to(root.current, { yPercent: 0, autoAlpha: 1, duration: 1.2, delay: 0.35 });
+    // `y: 0` est indispensable : GSAP lit le translateY(-120%) CSS en pixels,
+    // donc animer uniquement yPercent laisserait le header hors écran.
+    gsap.to(root.current, { y: 0, yPercent: 0, autoAlpha: 1, duration: 1.2, delay: 0.35 });
   }, [introDone]);
 
   // Inversion des couleurs dès qu'on quitte le hero + masquage au scroll descendant
@@ -32,7 +34,8 @@ export default function Nav() {
         onUpdate: (self) => {
           const scrolled = self.scroll() > window.innerHeight * 0.85;
           el.dataset.solid = String(scrolled);
-          const hide = self.direction === 1 && scrolled;
+          const mobile = window.matchMedia("(max-width: 899px)").matches;
+          const hide = !mobile && self.direction === 1 && scrolled;
           gsap.to(el, {
             yPercent: hide ? -130 : 0,
             duration: 0.7,

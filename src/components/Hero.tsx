@@ -64,6 +64,7 @@ export default function Hero() {
         { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1 },
         1.2,
       )
+        .from(`.${styles.meta} > *`, { y: 16, autoAlpha: 0, duration: 0.8, stagger: 0.08 }, 1.4)
         .from(`.${styles.eyebrow}`, { autoAlpha: 0, y: 14, duration: 0.9 }, 0.5)
         .from(`.${styles.corner}`, { autoAlpha: 0, y: 18, duration: 0.9, stagger: 0.1 }, 1.35)
         .from(`.${styles.cue}`, { autoAlpha: 0, duration: 0.8 }, 1.5);
@@ -157,6 +158,15 @@ export default function Hero() {
           >
             Réserver — {RESTAURANT.phone}
           </a>
+        </div>
+
+        <div className={styles.meta}>
+          <span>
+            {RESTAURANT.address} · {RESTAURANT.city}
+          </span>
+          <span>
+            {RESTAURANT.rating} <i aria-hidden>★</i> · {RESTAURANT.reviewCount} avis Google
+          </span>
         </div>
       </div>
 

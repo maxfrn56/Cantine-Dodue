@@ -70,15 +70,53 @@
 }
 
 @media (max-width: 899px) {
+  .gallery {
+    padding-block: clamp(3.75rem, 8vh, 5rem) 0;
+  }
+
+  .head {
+    margin-bottom: 1.35rem;
+  }
+
   .track {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    gap: 0.75rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2.6rem;
+    padding-right: var(--gutter);
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
   }
 
   .item {
     flex: 0 0 78vw;
     scroll-snap-align: start;
+    gap: 0.5rem;
+  }
+
+  .frame,
+  .item:nth-child(3n) .frame {
+    height: min(72vw, 20rem);
+    margin-top: 0;
+    border-radius: 0.7rem;
+  }
+
+  .item:nth-child(odd) .frame {
+    border-radius: 1.8rem 1.8rem 0.7rem 0.7rem;
+  }
+
+  .item figcaption {
+    font-size: 0.72rem;
+  }
+
+  .item span {
+    font-size: 0.52rem;
   }
 }

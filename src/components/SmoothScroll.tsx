@@ -17,6 +17,7 @@ export default function SmoothScroll() {
 
   useEffect(() => {
     if (prefersReducedMotion()) return;
+    if (window.matchMedia("(max-width: 899px)").matches) return;
 
     const lenis = new Lenis({
       lerp: 0.085,

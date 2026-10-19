@@ -120,3 +120,39 @@
   letter-spacing: 0.1em;
   opacity: 0.7;
 }
+
+@media (max-width: 899px) {
+  .center {
+    gap: 0.55rem;
+    padding-inline: 1.2rem;
+  }
+
+  .eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.36em;
+    text-indent: 0.36em;
+  }
+
+  .logo {
+    font-size: clamp(3.8rem, 18vw, 5.5rem);
+  }
+
+  .meta {
+    padding: 1.1rem var(--gutter) calc(1.1rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.7rem;
+  }
+
+  .wordsWindow {
+    font-size: 0.78rem;
+    max-width: 55%;
+  }
+
+  .word {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .counter {
+    font-size: 2.2rem;
+  }
+}
