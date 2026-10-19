@@ -6,8 +6,6 @@
   overflow: hidden;
   color: var(--cream);
   background: var(--wine);
-  visibility: hidden;
-  opacity: 0;
   padding-block: clamp(7rem, 14vh, 11rem) clamp(7rem, 12vh, 9rem);
   isolation: isolate;
 }

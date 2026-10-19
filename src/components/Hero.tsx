@@ -2,81 +2,19 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { gsap, ScrollTrigger, SplitText, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { useIsoLayoutEffect } from "@/lib/useIsoLayoutEffect";
-import { useAppState } from "@/components/AppState";
 import { RESTAURANT } from "@/lib/data";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
-  const { introDone } = useAppState();
   const root = useRef<HTMLElement>(null);
-
-  // Entrée orchestrée, déclenchée à la sortie du préloader
-  useIsoLayoutEffect(() => {
-    const el = root.current;
-    if (!el || !introDone) return;
-
-    const ctx = gsap.context(() => {
-      const reduced = prefersReducedMotion();
-      const tagline = el.querySelector<HTMLElement>(`.${styles.tagline}`);
-      const split = tagline && !reduced
-        ? new SplitText(tagline, { type: "lines", mask: "lines", linesClass: "heroLine" })
-        : null;
-
-      const tl = gsap.timeline({ defaults: { ease: "dodue" } });
-
-      tl.to(el, { autoAlpha: 1, duration: 0.01 })
-        .fromTo(
-          `.${styles.bgInner}`,
-          { clipPath: "inset(42% 22% 42% 22% round 40vw 40vw 1rem 1rem)", scale: 1.18 },
-          {
-            clipPath: "inset(0% 0% 0% 0% round 0rem)",
-            scale: 1,
-            duration: 1.8,
-            ease: "dodueIn",
-          },
-        )
-        .from(
-          `.${styles.logo}`,
-          { autoAlpha: 0, scale: 0.7, duration: 1.05 },
-          0.45,
-        )
-        .from(
-          `.${styles.topLetter}`,
-          { yPercent: 130, duration: 1, stagger: 0.035 },
-          0.55,
-        )
-        .from(
-          `.${styles.scriptLetter}`,
-          { yPercent: 118, rotate: 9, duration: 1.25, stagger: 0.06 },
-          0.7,
-        );
-
-      if (split) {
-        tl.from(split.lines, { yPercent: 110, duration: 1, stagger: 0.12 }, 1.05);
-      } else if (tagline) {
-        tl.from(tagline, { autoAlpha: 0, duration: 1 }, 1.05);
-      }
-
-      tl.from(
-        `.${styles.ctas} > *`,
-        { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1 },
-        1.2,
-      )
-        .from(`.${styles.meta} > *`, { y: 16, autoAlpha: 0, duration: 0.8, stagger: 0.08 }, 1.4)
-        .from(`.${styles.eyebrow}`, { autoAlpha: 0, y: 14, duration: 0.9 }, 0.5)
-        .from(`.${styles.corner}`, { autoAlpha: 0, y: 18, duration: 0.9, stagger: 0.1 }, 1.35)
-        .from(`.${styles.cue}`, { autoAlpha: 0, duration: 0.8 }, 1.5);
-    }, el);
-
-    return () => ctx.revert();
-  }, [introDone]);
 
   // Parallaxe de sortie : le damier glisse, le titre s'échappe vers le haut
   useIsoLayoutEffect(() => {
     const el = root.current;
     if (!el || prefersReducedMotion()) return;
+    if (window.matchMedia("(max-width: 899px)").matches) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
