@@ -18,30 +18,51 @@ export default function Preloader() {
     const el = root.current;
     if (!el) return;
 
-    if (prefersReducedMotion()) {
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
       setHidden(true);
       completeIntro();
-      return;
-    }
+    };
 
-    const counter = { value: 0 };
-    const counterEl = el.querySelector<HTMLElement>(`.${styles.count}`);
+    const safety = window.setTimeout(finish, 5200);
 
     const ctx = gsap.context(() => {
+      try {
+      const reduced = prefersReducedMotion();
+      const counter = { value: 0 };
+      const counterEl = el.querySelector<HTMLElement>(`.${styles.count}`);
+
       const tl = gsap.timeline({
         defaults: { ease: "dodue" },
-        onComplete: () => {
-          setHidden(true);
-          completeIntro();
-        },
+        onComplete: finish,
       });
 
+      if (reduced) {
+        tl.to(counter, {
+          value: 100,
+          duration: 0.8,
+          onUpdate: () => {
+            if (counterEl) {
+              counterEl.textContent = String(Math.round(counter.value)).padStart(2, "0");
+            }
+          },
+        }).to(`.${styles.tile}`, {
+          scaleY: 0,
+          transformOrigin: "top center",
+          duration: 0.55,
+          stagger: { each: 0.03, from: "center" },
+        });
+        return;
+      }
+
       tl.from(`.${styles.letter}`, {
-          yPercent: 125,
-          rotate: 7,
-          duration: 1.15,
-          stagger: 0.055,
-        })
+        yPercent: 125,
+        rotate: 7,
+        duration: 1.15,
+        stagger: 0.055,
+      })
         .from(
           `.${styles.eyebrow}`,
           { autoAlpha: 0, letterSpacing: "1.2em", duration: 1 },
@@ -63,7 +84,6 @@ export default function Preloader() {
           0,
         );
 
-      // Les mots défilent pendant le chargement
       WORDS.forEach((_, i) => {
         tl.to(
           `.${styles.word}`,
@@ -76,7 +96,6 @@ export default function Preloader() {
         );
       });
 
-      // Sortie : le mur de carreaux se retire colonne par colonne
       tl.to(
         `.${styles.center}`,
         { yPercent: -18, autoAlpha: 0, duration: 0.9 },
@@ -94,10 +113,16 @@ export default function Preloader() {
           },
           "exit+=0.25",
         );
+      } catch {
+        finish();
+      }
     }, el);
 
-    return () => ctx.revert();
-  }, []);
+    return () => {
+      window.clearTimeout(safety);
+      ctx.revert();
+    };
+  }, [completeIntro]);
 
   if (hidden) return null;
 

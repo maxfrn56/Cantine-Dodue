@@ -66,6 +66,8 @@ export default function SmoothScroll() {
     if (!introDone) return;
     lenisRef.current?.start();
     ScrollTrigger.refresh();
+    const later = window.setTimeout(() => ScrollTrigger.refresh(), 400);
+    return () => window.clearTimeout(later);
   }, [introDone]);
 
   return null;

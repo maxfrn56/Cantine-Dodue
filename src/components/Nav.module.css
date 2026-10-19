@@ -186,7 +186,23 @@
   padding: calc(var(--gutter) * 1.4) var(--gutter) var(--gutter);
   opacity: 0;
   visibility: hidden;
-  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+  transform: translate3d(0, -10%, 0);
+  transition:
+    opacity 0.45s var(--ease-expo),
+    transform 0.55s var(--ease-expo),
+    visibility 0s linear 0.45s;
+}
+
+.panel[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 0.4s var(--ease-expo),
+    transform 0.55s var(--ease-expo),
+    visibility 0s;
 }
 
 .panelNav {
@@ -215,10 +231,23 @@
   font-family: var(--font-grand-hotel), cursive;
   font-size: clamp(2.6rem, 11vw, 6rem);
   line-height: 1.05;
+  transform: translateY(0.7em);
+  opacity: 0;
   transition: transform 0.6s var(--ease-expo), opacity 0.6s;
 }
 
-.panelLink:hover > span {
+.panel[data-open="true"] .panelLink > span {
+  transform: none;
+  opacity: 1;
+}
+
+.panel[data-open="true"] .panelLink:nth-child(1) > span { transition-delay: 0.08s; }
+.panel[data-open="true"] .panelLink:nth-child(2) > span { transition-delay: 0.14s; }
+.panel[data-open="true"] .panelLink:nth-child(3) > span { transition-delay: 0.2s; }
+.panel[data-open="true"] .panelLink:nth-child(4) > span { transition-delay: 0.26s; }
+.panel[data-open="true"] .panelLink:nth-child(5) > span { transition-delay: 0.32s; }
+
+.panel[data-open="true"] .panelLink:hover > span {
   transform: translateX(1.2rem);
   opacity: 0.75;
 }
@@ -231,6 +260,15 @@
   line-height: 1.7;
   border-top: 1px solid rgba(247, 237, 219, 0.24);
   padding-top: 1.5rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s var(--ease-expo), transform 0.5s var(--ease-expo);
+}
+
+.panel[data-open="true"] .panelFoot {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.28s;
 }
 
 @media (max-width: 899px) {
@@ -279,7 +317,7 @@
     border-bottom: 1px solid rgba(247, 237, 219, 0.1);
   }
 
-  .panelLink:hover > span {
+  .panel[data-open="true"] .panelLink:hover > span {
     transform: none;
     opacity: 1;
   }

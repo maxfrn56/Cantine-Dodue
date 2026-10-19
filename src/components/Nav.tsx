@@ -48,45 +48,15 @@ export default function Nav() {
     return () => ctx.revert();
   }, []);
 
-  // Ouverture du menu plein écran
-  useIsoLayoutEffect(() => {
-    const el = panel.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ paused: true, defaults: { ease: "dodue" } });
-      tl.set(el, { autoAlpha: 1 })
-        .fromTo(
-          el,
-          { clipPath: "inset(0 0 100% 0)" },
-          { clipPath: "inset(0 0 0% 0)", duration: 0.9 },
-        )
-        .from(
-          `.${styles.panelLink} > span`,
-          { yPercent: 115, rotate: 5, duration: 0.85, stagger: 0.07 },
-          0.18,
-        )
-        .from(`.${styles.panelFoot} > *`, { autoAlpha: 0, y: 20, stagger: 0.08 }, 0.4);
-
-      if (open) tl.play(0);
-      else {
-        gsap.to(el, {
-          clipPath: "inset(0 0 100% 0)",
-          duration: 0.7,
-          ease: "dodueIn",
-          onComplete: () => gsap.set(el, { autoAlpha: 0 }),
-        });
-      }
-    }, el);
-
-    return () => ctx.revert();
-  }, [open]);
-
   useIsoLayoutEffect(() => {
     const lenis = window.__lenis;
+    document.body.style.overflow = open ? "hidden" : "";
     if (!lenis) return;
     if (open) lenis.stop();
     else if (introDone) lenis.start();
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open, introDone]);
 
   return (
@@ -138,7 +108,13 @@ export default function Nav() {
         </div>
       </header>
 
-      <div ref={panel} className={`${styles.panel} u-damier`} role="dialog" aria-modal="true">
+      <div
+        ref={panel}
+        className={`${styles.panel} u-damier`}
+        data-open={open}
+        role="dialog"
+        aria-modal="true"
+      >
         <nav className={styles.panelNav}>
           {NAV_LINKS.map((link, i) => (
             <a
