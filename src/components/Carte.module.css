@@ -81,35 +81,8 @@
   color: color-mix(in srgb, var(--ink) 58%, transparent);
 }
 
-.follow {
-  display: none;
-}
-
 @media (hover: hover) and (pointer: fine) {
-  .follow {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 40;
-    width: 15rem;
-    height: 20rem;
-    margin: -10rem 0 0 -7.5rem;
-    border-radius: 12rem 12rem 0.8rem 0.8rem;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.86);
-    box-shadow: 0 22px 50px rgba(36, 19, 17, 0.28);
-  }
-
-  .follow img {
-    object-fit: cover;
-  }
-
-  .row:hover .name,
-  .row:focus-visible .name {
+  .row:hover .name {
     color: var(--brick);
   }
 }
