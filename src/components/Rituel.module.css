@@ -1,0 +1,166 @@
+.rituel {
+  background: var(--wine);
+  color: var(--cream);
+}
+
+.pin {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding-block: clamp(4.5rem, 8vh, 7rem);
+}
+
+.layout {
+  display: grid;
+  gap: clamp(2rem, 5vh, 3.5rem);
+}
+
+.header {
+  display: grid;
+  gap: 1rem;
+  max-width: 22ch;
+}
+
+.lead {
+  max-width: 38ch;
+  color: color-mix(in srgb, var(--cream) 78%, transparent);
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  gap: 2rem;
+}
+
+.progress {
+  display: none;
+}
+
+.copy {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.step {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 38ch;
+}
+
+.index {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  opacity: 0.55;
+}
+
+.stepTitle {
+  font-family: var(--font-grand-hotel), cursive;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.step p {
+  color: color-mix(in srgb, var(--cream) 80%, transparent);
+}
+
+.visuals {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.visual {
+  position: relative;
+  height: min(62vw, 28rem);
+  overflow: hidden;
+}
+
+.visual img {
+  object-fit: cover;
+}
+
+.visual figcaption {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--wine) 72%, transparent);
+  backdrop-filter: blur(8px);
+  padding: 0.55rem 0.75rem;
+}
+
+@media (min-width: 960px) {
+  .layout {
+    grid-template-columns: minmax(16rem, 0.85fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: 4vw;
+  }
+
+  .header {
+    align-self: start;
+    padding-top: 0.4rem;
+  }
+
+  .stage {
+    grid-column: 2;
+    grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+    min-height: 72vh;
+  }
+
+  .progress {
+    display: block;
+    position: absolute;
+    left: -1.4rem;
+    top: 8%;
+    bottom: 8%;
+    width: 1px;
+    background: rgba(247, 237, 219, 0.18);
+  }
+
+  .progressFill {
+    position: absolute;
+    inset: 0;
+    background: var(--cream);
+    transform-origin: top center;
+    transform: scaleY(0);
+  }
+
+  .copy {
+    display: grid;
+    align-items: center;
+    min-height: 22rem;
+  }
+
+  .step {
+    grid-area: 1 / 1;
+  }
+
+  .visuals {
+    position: relative;
+    height: min(72vh, 640px);
+    display: block;
+  }
+
+  .visual {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    clip-path: inset(100% 0 0 0);
+  }
+
+  .visual:first-child {
+    clip-path: inset(0);
+  }
+
+  .step:not(:first-child) {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

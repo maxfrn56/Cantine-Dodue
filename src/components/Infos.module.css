@@ -1,0 +1,133 @@
+.infos {
+  background: var(--cream);
+  overflow: clip;
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.head {
+  display: grid;
+  gap: 1rem;
+}
+
+.title {
+  max-width: 8ch;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.status i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--brick);
+}
+
+.status[data-open="true"] i {
+  background: #3f7a3a;
+  box-shadow: 0 0 0 6px rgba(63, 122, 58, 0.16);
+}
+
+.panel {
+  display: grid;
+  gap: 1.3rem;
+  align-content: start;
+}
+
+.address {
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.25;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ig {
+  font-size: 0.92rem;
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+}
+
+.hours {
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.92rem;
+}
+
+.hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.6rem;
+}
+
+.hours li[data-today="true"] {
+  background: var(--wine);
+  color: var(--cream);
+}
+
+.hours li[data-closed="true"] {
+  opacity: 0.5;
+}
+
+.signReveal {
+  clip-path: inset(0);
+}
+
+.sign {
+  height: min(62vh, 520px);
+  border-radius: 1.2rem;
+}
+
+.sign img {
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-areas:
+      "head sign"
+      "panel sign"
+      "hours sign";
+    align-items: start;
+    column-gap: 5vw;
+  }
+
+  .head {
+    grid-area: head;
+  }
+
+  .panel {
+    grid-area: panel;
+  }
+
+  .hours {
+    grid-area: hours;
+  }
+
+  .signReveal {
+    grid-area: sign;
+  }
+
+  .sign {
+    height: min(86vh, 820px);
+    border-radius: 14rem 14rem 1rem 1rem;
+  }
+}

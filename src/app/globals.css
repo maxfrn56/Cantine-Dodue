@@ -1,0 +1,370 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Cantine Dodue — design system
+   Palette relevée sur l'identité du restaurant : zellige rouge brique,
+   crème, rose poudré de la façade, vert sage de l'enseigne.
+   ========================================================================== */
+
+:root {
+  --wine: #4e0f15;
+  --brick: #8b2228;
+  --brick-light: #a72f2d;
+  --cream: #f7eddb;
+  --cream-soft: #fcf6ec;
+  --rose: #efb4b0;
+  --rose-pale: #f7d7d3;
+  --ink: #241311;
+  --sage: #c2cc9f;
+
+  --font-fallback: ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --gutter: clamp(1.25rem, 4.5vw, 5rem);
+  --maxw: 1560px;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-power: cubic-bezier(0.65, 0.05, 0, 1);
+
+  --radius-arch: 50vw 50vw 0.75rem 0.75rem;
+}
+
+@theme inline {
+  --color-wine: var(--wine);
+  --color-brick: var(--brick);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --font-display: var(--font-anton), var(--font-fallback);
+  --font-script: var(--font-grand-hotel), cursive;
+  --font-body: var(--font-jost), var(--font-fallback);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto;
+  background: var(--wine);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-jost), var(--font-fallback);
+  font-size: clamp(1rem, 0.45vw + 0.9rem, 1.125rem);
+  line-height: 1.55;
+  overflow-x: clip;
+}
+
+body[data-intro="running"] {
+  overflow: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--brick);
+  color: var(--cream);
+}
+
+/* Curseur custom : on masque le natif uniquement sur les vrais pointeurs */
+@media (hover: hover) and (pointer: fine) {
+  body[data-cursor-ready="true"],
+  body[data-cursor-ready="true"] * {
+    cursor: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Layout
+   -------------------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(6rem, 12vh, 11rem);
+}
+
+/* --------------------------------------------------------------------------
+   Typographie
+   -------------------------------------------------------------------------- */
+
+.script {
+  font-family: var(--font-grand-hotel), cursive;
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.01em;
+}
+
+.display {
+  font-family: var(--font-anton), var(--font-fallback);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+}
+
+.eyebrow {
+  font-family: var(--font-anton), var(--font-fallback);
+  font-size: clamp(0.65rem, 0.28vw + 0.6rem, 0.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  line-height: 1;
+}
+
+.lede {
+  font-size: clamp(1.05rem, 0.6vw + 0.95rem, 1.375rem);
+  line-height: 1.6;
+}
+
+.sectionTitle {
+  font-family: var(--font-anton), var(--font-fallback);
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 7vw, 7.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.015em;
+}
+
+.sectionTitle em {
+  font-family: var(--font-grand-hotel), cursive;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1.22em;
+  line-height: 0.8;
+}
+
+/* Masque de révélation ligne par ligne */
+.lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.lineMask > span {
+  display: block;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+   Motifs maison : damier & vichy
+   -------------------------------------------------------------------------- */
+
+.u-damier {
+  --damier-color: rgba(36, 19, 17, 0.08);
+  --damier-size: 2.5rem;
+  background-image: conic-gradient(
+    var(--damier-color) 25%,
+    transparent 0 50%,
+    var(--damier-color) 0 75%,
+    transparent 0
+  );
+  background-size: var(--damier-size) var(--damier-size);
+}
+
+.u-vichy {
+  --vichy-color: rgba(139, 34, 40, 0.16);
+  --vichy-size: 1.5rem;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      var(--vichy-color) 0 var(--vichy-size),
+      transparent var(--vichy-size) calc(var(--vichy-size) * 2)
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--vichy-color) 0 var(--vichy-size),
+      transparent var(--vichy-size) calc(var(--vichy-size) * 2)
+    );
+}
+
+.u-grain {
+  position: relative;
+}
+
+.u-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   Boutons
+   -------------------------------------------------------------------------- */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.05rem 2.1rem;
+  border-radius: 999px;
+  overflow: hidden;
+  isolation: isolate;
+  font-family: var(--font-anton), var(--font-fallback);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  background: var(--ink);
+  color: var(--cream);
+  transition: color 0.45s var(--ease-expo);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--brick);
+  transform: translateY(101%);
+  border-radius: 40% 40% 0 0;
+  transition: transform 0.65s var(--ease-expo), border-radius 0.65s var(--ease-expo);
+}
+
+.btn:hover::before {
+  transform: translateY(0);
+  border-radius: 0;
+}
+
+.btn--cream {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.btn--cream::before {
+  background: var(--rose);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: currentColor;
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.btn--ghost::before {
+  background: currentColor;
+}
+
+.btn--ghost:hover {
+  color: var(--cream);
+}
+
+.btn__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.5s var(--ease-expo);
+}
+
+.btn:hover .btn__dot {
+  transform: scale(1.9);
+}
+
+/* --------------------------------------------------------------------------
+   Divers
+   -------------------------------------------------------------------------- */
+
+.arch {
+  border-radius: var(--radius-arch);
+  overflow: hidden;
+}
+
+.figure {
+  position: relative;
+  overflow: hidden;
+}
+
+.figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.starRow {
+  display: inline-flex;
+  gap: 0.2em;
+  color: var(--brick);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px
+  ;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

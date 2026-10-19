@@ -1,0 +1,51 @@
+.root {
+  --marquee-bg: var(--cream);
+  --marquee-fg: var(--ink);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--marquee-bg);
+  color: var(--marquee-fg);
+  padding-block: clamp(0.7rem, 1.1vw, 1.1rem);
+  border-block: 1px solid color-mix(in srgb, var(--marquee-fg) 16%, transparent);
+}
+
+.root[data-variant="wine"] {
+  --marquee-bg: var(--wine);
+  --marquee-fg: var(--cream);
+}
+
+.root[data-variant="rose"] {
+  --marquee-bg: var(--rose);
+  --marquee-fg: var(--wine);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.4rem, 3vw, 3rem);
+  padding-inline: clamp(0.7rem, 1.5vw, 1.5rem);
+  font-family: var(--font-anton), sans-serif;
+  font-size: clamp(0.85rem, 1.5vw, 1.35rem);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+}
+
+.sep {
+  font-style: normal;
+  font-size: 0.6em;
+  opacity: 0.6;
+  transform: translateY(-0.05em);
+}

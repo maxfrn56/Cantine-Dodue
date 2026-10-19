@@ -1,0 +1,91 @@
+.anais {
+  background:
+    linear-gradient(180deg, var(--cream) 0%, var(--rose-pale) 48%, var(--cream) 100%);
+  overflow: clip;
+}
+
+.grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.portraitWrap {
+  position: relative;
+}
+
+.kicker {
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.script {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(4.5rem, 14vw, 9rem);
+  color: var(--wine);
+  margin-bottom: -0.28em;
+  padding-left: 0.08em;
+}
+
+.portraitReveal {
+  clip-path: inset(0);
+}
+
+.portrait {
+  height: min(78vh, 720px);
+}
+
+.portrait img {
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.copy {
+  display: grid;
+  gap: 1.2rem;
+  align-content: center;
+  max-width: 42ch;
+}
+
+.copy p {
+  color: color-mix(in srgb, var(--ink) 82%, transparent);
+}
+
+.quote {
+  font-family: var(--font-grand-hotel), cursive;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  line-height: 1.15;
+  color: var(--wine);
+  max-width: 16ch;
+}
+
+.sign {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.62;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: 0.95fr 1.05fr;
+    align-items: center;
+  }
+
+  .script {
+    position: absolute;
+    left: -0.08em;
+    top: 4%;
+    font-size: clamp(6rem, 11vw, 10rem);
+    mix-blend-mode: multiply;
+  }
+
+  .portrait {
+    height: min(86vh, 820px);
+  }
+
+  .copy {
+    padding-top: 6rem;
+  }
+}

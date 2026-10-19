@@ -1,0 +1,134 @@
+.carte {
+  background: var(--cream);
+  overflow: clip;
+}
+
+.head {
+  display: grid;
+  gap: 1.4rem;
+  margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.title {
+  max-width: 12ch;
+}
+
+.note {
+  max-width: 36ch;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+
+.board {
+  display: grid;
+  gap: clamp(2.5rem, 5vh, 4rem);
+}
+
+.groupLabel {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brick);
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas:
+    "name dots price"
+    "detail detail detail";
+  align-items: baseline;
+  gap: 0.35rem 0.8rem;
+  width: 100%;
+  text-align: left;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.name {
+  grid-area: name;
+  font-size: clamp(1.15rem, 1.6vw, 1.55rem);
+  font-weight: 500;
+}
+
+.dots {
+  grid-area: dots;
+  align-self: center;
+  height: 0;
+  border-bottom: 1px dotted color-mix(in srgb, var(--ink) 28%, transparent);
+  min-width: 2rem;
+}
+
+.price {
+  grid-area: price;
+  font-family: var(--font-anton), sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+}
+
+.price::after {
+  content: " €";
+  font-size: 0.55em;
+  letter-spacing: 0.08em;
+}
+
+.detail {
+  grid-area: detail;
+  font-size: 0.88rem;
+  color: color-mix(in srgb, var(--ink) 58%, transparent);
+}
+
+.follow {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .follow {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    width: 15rem;
+    height: 20rem;
+    margin: -10rem 0 0 -7.5rem;
+    border-radius: 12rem 12rem 0.8rem 0.8rem;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.86);
+    box-shadow: 0 22px 50px rgba(36, 19, 17, 0.28);
+  }
+
+  .follow img {
+    object-fit: cover;
+  }
+
+  .row:hover .name,
+  .row:focus-visible .name {
+    color: var(--brick);
+  }
+}
+
+@media (min-width: 900px) {
+  .head {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: end;
+  }
+
+  .note {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .board {
+    grid-template-columns: 1fr;
+    max-width: 920px;
+    margin-inline: auto;
+    width: 100%;
+  }
+}
